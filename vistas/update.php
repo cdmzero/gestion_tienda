@@ -40,8 +40,8 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
    $nombreAnterior = $_POST['nombreAnterior'];
    
    $controlador = ControladorArticulo::getControlador();
-   $articulo = $controlador->buscarArticulo($nombre);
-   if (isset($articulo) && $nombreAnterior != $nombre) {
+   $articulo = $controlador->buscarArticulo($Valnombre);
+   if (isset($articulo) && $nombreAnterior != $Valnombre){
        $Errnombre = "Ya existe un Articulo con este nombre en la Base de Datos";
        $errores[]= $Errnombre ;
    } else {
@@ -53,7 +53,7 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
    if (empty($Valprecio)) {
        $Errprecio = "Debe elegir al menos una raza";
        $errores[]= $Errprecio ;
-   }elseif(!(preg_match('/(^[1-9]?[1-9]?[1-9]+$)/', $Valprecio))){
+   }elseif(!(preg_match('/(^[1-9]?[0-9]?[0-9]?[0-9]+$)/', $Valprecio))){
        $Errprecio = "Por introduzca un precio del 1 al 999";
        $errores[]= $Errprecio;
    } else {
@@ -277,7 +277,7 @@ if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
         <div class="form-group <?php echo (!empty($Errmodelo)) ? 'error: ' : ''; ?>">
     
     <label>Modelo</label>
-    <input type="text" required name="modelo" pattern="([^\s][A-zÀ-ž\s]+)" title="El modelo no puede contener números" value="<?php echo $modelo; ?>">
+    <input type="text" required name="modelo" minlegth='1' maxlegth='4' title="El modelo no puede contener números" value="<?php echo $modelo; ?>">
     <span class="help-block"><?php echo $Errmodelo;?></span> 
 </div>
     <!-- marca -->
@@ -294,7 +294,7 @@ if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
     <!-- Precio -->
     <div class="form-group <?php echo (!empty($Errprecio)) ? 'error: ' : ''; ?>">
         <label>Precio</label>
-        <input type="text" required name="precio" pattern="([1-9]?[1-9]?[1-9])" minlength="1" maxlength="3" title="Inserte un numero  del 1 al 999" value="<?php echo $precio; ?>">
+        <input type="text" required name="precio" pattern="([1-9]?[0-9]?[0-9]?[0-9])" minlength="1" maxlength="3" title="Inserte un numero  del 1 al 999" value="<?php echo $precio; ?>">
         <span class="help-block"><?php  echo $Errprecio; ?></span> 
     </div>
     <!-- Disponible-->

@@ -69,8 +69,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]) {
         //TIPO
         $Valtipo = $_POST["tipo"];
         if (empty($Valtipo)) {
-                $Valtipo = "Debe elegir al menos un tipo";
-                $errores[] = $Valtipo;
+                $Errtipo = "Debe elegir al menos un tipo";
+                $errores[] = $Errtipo;
         } else {
             $tipo = implode(", ",$_POST["tipo"]);
             $tipo = $tipo;
@@ -227,12 +227,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]) {
     <!-- marca -->
     <div class="form-group  <?php echo (!empty($Errmarca)) ? 'error: ' : ''; ?>">
         <label>Marca</label>
-        <input type="radio" name="marca" value="Samsung" <?php echo (strstr($Valmarca, 'Samsung')) ? 'checked' : ''; ?>>Samsung</input>
-        <input type="radio" name="marca" value="Apple" <?php echo (strstr($Valmarca, 'Apple')) ? 'checked' : ''; ?>>Apple</input>
-        <input type="radio" name="marca" value="HP" <?php echo (strstr($Valmarca, 'HP')) ? 'checked' : ''; ?>>HP</input>
-        <input type="radio" name="marca" value="Microsoft" <?php echo (strstr($Valmarca, 'Microsoft')) ? 'checked' : ''; ?>>Microsoft</input>
-        <input type="radio" name="marca" value="Xiaomi" <?php echo (strstr($Valmarca, 'Xiaomi')) ? 'checked' : ''; ?>>Xiaomi</input>
-        <input type="radio" name="marca" value="Cisco" <?php echo (strstr($Valmarca, 'Cisco')) ? 'checked' : ''; ?>>Cisco</input>
+        <input type="radio" name="marca" required value="Samsung" <?php echo (strstr($Valmarca, 'Samsung')) ? 'checked' : ''; ?>>Samsung</input>
+        <input type="radio" name="marca" required value="Apple" <?php echo (strstr($Valmarca, 'Apple')) ? 'checked' : ''; ?>>Apple</input>
+        <input type="radio" name="marca" required value="HP" <?php echo (strstr($Valmarca, 'HP')) ? 'checked' : ''; ?>>HP</input>
+        <input type="radio" name="marca" required value="Microsoft" <?php echo (strstr($Valmarca, 'Microsoft')) ? 'checked' : ''; ?>>Microsoft</input>
+        <input type="radio" name="marca" required value="Xiaomi" <?php echo (strstr($Valmarca, 'Xiaomi')) ? 'checked' : ''; ?>>Xiaomi</input>
+        <input type="radio" name="marca" required value="Cisco" <?php echo (strstr($Valmarca, 'Cisco')) ? 'checked' : ''; ?>>Cisco</input>
         <span class="help-block"><?php echo $Errmarca; ?></span> 
     </div>
     <!-- Precio -->
@@ -245,18 +245,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]) {
     <div class="form-group <?php echo (!empty($Errdisponible)) ? 'error: ' : ''; ?>">
         <label>Disponible</label>
         <select name="disponible">
-            <option value="SI" <?php echo (strstr($Valdisponible, 'SI')) ? 'selected' : ''; ?>>SI</option>
-            <option value="NO" <?php echo (strstr($Valdisponible, 'NO')) ? 'selected' : ''; ?>>NO</option>
+            <option value="SI" required <?php echo (strstr($Valdisponible, 'SI')) ? 'selected' : ''; ?>>SI</option>
+            <option value="NO" required <?php echo (strstr($Valdisponible, 'NO')) ? 'selected' : ''; ?>>NO</option>
         </select>
         <span class="help-block"><?php  echo $Errdisponible; ?></span> 
     </div>
     <!-- Tipo -->
     <div class="form-group <?php echo (!empty($Errtipo)) ? 'error: ' : ''; ?>"s>
         <label>Tipo</label>
-        <input type="checkbox" name="tipo[]" value="Hardware" <?php echo (strstr($tipo, 'Hardware')) ? 'checked' : ''; ?>>Hardware</input>
-        <input type="checkbox" name="tipo[]" value="Programa util" <?php echo (strstr($tipo, 'Programa util ')) ? 'checked' : ''; ?>>Programa Util</input>
-        <input type="checkbox" name="tipo[]" value="Productividad" <?php echo (strstr($tipo, 'Productividad ')) ? 'checked' : ''; ?>>Productividad </input>
-        <input type="checkbox" name="tipo[]" value="Multiples Funcionalidades" <?php echo (strstr($tipo, 'Multiples Funcionalidades')) ? 'checked' : ''; ?>>Multiples Funcionalidades</input>
+        <input type="checkbox"  name="tipo[]" value="Hardware" <?php echo (strstr($tipo, 'Hardware')) ? 'checked' : ''; ?>>Hardware</input>
+        <input type="checkbox"  name="tipo[]" value="Programa util" <?php echo (strstr($tipo, 'Programa util ')) ? 'checked' : ''; ?>>Programa Util</input>
+        <input type="checkbox"  name="tipo[]" value="Productividad" <?php echo (strstr($tipo, 'Productividad ')) ? 'checked' : ''; ?>>Productividad </input>
+        <input type="checkbox" checked name="tipo[]" value="Multiples Funcionalidades" <?php echo (strstr($tipo, 'Multiples Funcionalidades')) ? 'checked' : ''; ?>>Multiples Funcionalidades</input>
         <span class="help-block"><?php echo $Errtipo; ?></span> 
     </div>
     <!-- Foto-->

@@ -40,7 +40,7 @@ class ControladorArticulo {
 
         if (count($filas) > 0) {
             foreach ($filas as $a) {
-                $articulo = new Articulo($a->id, $a->nombre, $a->tipo, $a->disponible, $a->precio, $a->marca, $a->modelo,  $a->imagen);
+                $articulo = new Articulo($a->id, $a->nombre, $a->marca, $a->modelo, $a->tipo, $a->disponible, $a->precio,$a->imagen);
                 $lista[] = $articulo;
             }
             $bd->cerrarBD();
@@ -50,15 +50,15 @@ class ControladorArticulo {
         }    
     }
 //----------------------------------------------------------------------------------------------------
-    public function almacenarArticulo($nombre, $tipo, $disponible, $precio, $marca, $modelo,  $imagen){
+    public function almacenarArticulo($nombre, $marca, $modelo, $tipo, $disponible, $precio, $imagen){
         $bd = ControladorBD::getControlador();
         $bd->abrirBD();
         //muy importante respetar el orden de las columnas en el insert y corresponderse a la tabla de verdad!!
         // el resto se puede poner de orden que nos de la gana
-        $consulta = "INSERT INTO productos (nombre, marca, modelo, tipo, disponible, precio, imagen) VALUES ( :nombre, :tipo, :disponible, :precio, :marca, :modelo,  :imagen)";
+        $consulta = "INSERT INTO productos (nombre,  marca, modelo,tipo, disponible, precio, imagen) VALUES ( :nombre,:marca,:modelo, :tipo, :disponible, :precio, :imagen)";
         
-        $parametros= array(':nombre'=>$nombre,':tipo'=>$tipo, ':disponible'=>$disponible, ':precio'=>$precio,':marca'=>$marca,
-                             ':modelo'=>$modelo,':imagen'=>$imagen);
+        $parametros=array(':nombre'=>$nombre, ':marca'=>$marca, ':modelo'=>$modelo, ':tipo'=>$tipo,  ':disponible'=>$disponible, ':precio'=>$precio,
+        ':imagen'=>$imagen);
         $estado = $bd->actualizarBD($consulta,$parametros);
         $bd->cerrarBD();
         return $estado;
@@ -76,7 +76,7 @@ class ControladorArticulo {
         
         if (count($filas) > 0) {
             foreach ($filas as $a) {
-                $Articulo = new Articulo($a->id, $a->nombre, $a->tipo, $a->disponible, $a->precio, $a->marca, $a->modelo,  $a->imagen);
+                $Articulo = new Articulo($a->id, $a->nombre, $a->marca, $a->modelo,$a->tipo, $a->disponible, $a->precio,  $a->imagen);
             }
             $bd->cerrarBD();
             return $Articulo;
@@ -95,7 +95,7 @@ class ControladorArticulo {
         $filas=$res->fetchAll(PDO::FETCH_OBJ);
         if (count($filas) > 0) {
             foreach ($filas as $a) {
-                $Articulo = new Articulo($a->id, $a->nombre, $a->tipo, $a->disponible, $a->precio, $a->marca, $a->modelo,  $a->imagen);
+                $Articulo = new Articulo($a->id, $a->nombre, $a->marca, $a->modelo, $a->tipo, $a->disponible, $a->precio, $a->imagen);
             }
             $bd->cerrarBD();
             return $Articulo;
@@ -115,14 +115,14 @@ class ControladorArticulo {
         return $estado;
     }
 //-------------------------------------------------------------------------------------------------  
-    public function actualizarArticulo($id,$nombre, $tipo, $disponible, $precio, $marca, $modelo,  $imagen){
+    public function actualizarArticulo($id,$nombre,$marca, $modelo, $tipo, $disponible, $precio,$imagen){
         $bd = ControladorBD::getControlador();
         $bd->abrirBD();
-        $consulta = "UPDATE productos SET  nombre=:nombre, tipo=:tipo, disponible=:disponible, precio=:precio, marca=:marca,  
-            modelo=:modelo, imagen=:imagen 
+        $consulta = "UPDATE productos SET  nombre=:nombre, marca=:marca, modelo=:modelo, tipo=:tipo, disponible=:disponible, precio=:precio,   
+             imagen=:imagen 
             WHERE id=:id";
-        $parametros=array(':id'=>$id ,':nombre'=>$nombre,':tipo'=>$tipo, ':disponible'=>$disponible, ':precio'=>$precio,':marca'=>$marca,
-        ':modelo'=>$modelo,':imagen'=>$imagen);
+        $parametros= array(':id'=>$id ,':nombre'=>$nombre,  ':marca'=>$marca,':modelo'=>$modelo,':tipo'=>$tipo,':disponible'=>$disponible, ':precio'=>$precio,
+       ':imagen'=>$imagen);
         $estado = $bd->actualizarBD($consulta,$parametros);
         $bd->cerrarBD();
         return $estado;
